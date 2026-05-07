@@ -63,11 +63,11 @@ def TTS(response):
 def main():
     # 기본 설정
     st.set_page_config(
-        page_title="음성 비서 프로그램",
+        page_title="Jamon's 음성 비서 프로그램",
         layout="wide")
     
     # 제목
-    st.header("음성 비서 프로그램")
+    st.header("Jamon's 음성 비서 프로그램")
     
     # 구분선
     st.markdown("---")
