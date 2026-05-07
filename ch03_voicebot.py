@@ -54,7 +54,7 @@ def TTS(response):
             <source src="data:audio/mp3;base64,{b64}" type="audio/mp3">
             </audio>
             """
-        st.markdown(md, unsfae_allow_html=True,)
+        st.markdown(md, unsafe_allow_html=True,)
         
     # 파일 삭제
     os.remove(filename)
@@ -137,7 +137,7 @@ def main():
             now = datetime.now().strftime("%H:%M")
             st.session_state["chat"]=st.session_state["chat"]+[("user", now, question)]
             # GPT 모델에 넣을 프롬프트를 위해 질문 내용 저장 
-            st.session_state["messages"]=st.session_state["message"]+[{"role": "user", "content":question}]
+            st.session_state["messages"]=st.session_state["messages"]+[{"role": "user", "content":question}]
                                                                
                                                                
     with col2:
