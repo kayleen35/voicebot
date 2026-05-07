@@ -126,18 +126,30 @@ def main():
         # 왼쪽 영역 작성
         st.subheader("질문하기")
         # 음성 녹음 아이콘 추가
-        audio=audiorecorder("클릭하여 녹음하기", "녹음 중...")
-        if (audio.duration_seconds > 0) and (st.session_state["check_audio"] == False): #녹음을 실행하면?
-            # 음성 재생
-            st.audio(audio.export().read())
-            # 음원 파일에서 텍스트 추출
-            question=STT(audio, st.session_state["OPENAI_API"])
+        # audio=audiorecorder("클릭하여 녹음하기", "녹음 중...")
+        # if (audio.duration_seconds > 0) and (st.session_state["check_audio"] == False): #녹음을 실행하면?
+        #     # 음성 재생
+        #     st.audio(audio.export().read())
+        #     # 음원 파일에서 텍스트 추출
+        #     question=STT(audio, st.session_state["OPENAI_API"])
             
-            # 채팅을 시각화하기 위해 질문 내용 저장
+        #     # 채팅을 시각화하기 위해 질문 내용 저장
+        #     now = datetime.now().strftime("%H:%M")
+        #     st.session_state["chat"]=st.session_state["chat"]+[("user", now, question)]
+        #     # GPT 모델에 넣을 프롬프트를 위해 질문 내용 저장 
+        #     st.session_state["messages"]=st.session_state["messages"]+[{"role": "user", "content":question}]
+        
+        audio = audiorecorder("클릭하여 녹음하기", "녹음 중...")
+        if (audio.duration_seconds > 0) and (st.session_state["check_audio"] == False):
+            st.audio(audio.export().read())
+            st.write("✅ 녹음 완료")
+            st.write(f"API 키 입력됨: {bool(st.session_state['OPENAI_API'])}")
+            question = STT(audio, st.session_state["OPENAI_API"])
+            st.write(f"✅ STT 완료: {question}")
+    
             now = datetime.now().strftime("%H:%M")
-            st.session_state["chat"]=st.session_state["chat"]+[("user", now, question)]
-            # GPT 모델에 넣을 프롬프트를 위해 질문 내용 저장 
-            st.session_state["messages"]=st.session_state["messages"]+[{"role": "user", "content":question}]
+            st.session_state["chat"] = st.session_state["chat"] + [("user", now, question)]
+            st.session_state["messages"] = st.session_state["messages"] + [{"role": "user", "content": question}]
                                                                
                                                                
     with col2:
