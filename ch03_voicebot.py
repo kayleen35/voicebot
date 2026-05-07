@@ -143,7 +143,7 @@ def main():
     with col2:
         # 오른쪽 영역 작성
         st.subheader("질문/답변")
-        if (audio.duration_seconds > 0) and (st.session_state["check_reset"]==Flase):
+        if (audio.duration_seconds > 0) and (st.session_state["check_audio"]==False):
             # ChatGPT 에게 답변 얻기
             response = ask_gpt(st.session_state["messages"], model, st.session_state["OPENAI_API"])
             
